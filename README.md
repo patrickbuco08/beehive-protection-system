@@ -28,7 +28,43 @@ This project uses a camera, sound deterrents, and a drone to protect beehives fr
 ### 1. Create and Activate Virtual Environment
 ```bash
 python3.11 -m venv beehiveenv
-source beehiveenv/bin/activate
+```
+
+- **On Linux/macOS:**
+  ```bash
+  source beehiveenv/bin/activate
+  ```
+- **On Windows (cmd):**
+  ```cmd
+  beehiveenv\Scripts\activate
+  ```
+- **On Windows (PowerShell):**
+  ```powershell
+  beehiveenv\Scripts\Activate.ps1
+  ```
+
+### 🐍 Using Conda Environments
+
+#### Create a new conda environment (e.g., named birdenv) with Python 3.11:
+```bash
+conda create -n beehiveenv python=3.11
+```
+
+#### List all available conda environments:
+```bash
+conda env list
+# or
+conda info --envs
+```
+
+#### Activate a conda environment:
+```bash
+conda activate beehiveenv
+```
+
+#### Deactivate the current environment:
+```bash
+conda deactivate
 ```
 
 ### 2. Install System Dependencies
@@ -64,7 +100,7 @@ pip install -e .
 
 ### 7. (Optional) Install AI Edge Lite Runtime
 ```bash
-pip install ai_edge_litert
+pip install ai-edge-litert
 ```
 
 ---
