@@ -13,3 +13,6 @@ SOUND_FILES = [
 MODEL_NAME = "bird_detection_model_v1.tflite"
 MODEL_INPUT_SIZE = (180, 180)
 MODEL_CLASS_NAMES = ['no_bird', 'with_bird']
+
+TILE_SHAPES = [(4, 4), (6, 6)]
+CONFIDENCE_THRESHOLD = 0.50
