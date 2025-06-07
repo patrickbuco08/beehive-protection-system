@@ -48,6 +48,6 @@ for img_path in image_files:
 
         if label == "with_bird" and (MIN_CONFIDENCE_THRESHOLD <= conf <= MAX_CONFIDENCE_THRESHOLD):
             print(f"bird detected. confidence {conf:.2f}")
-            save_detected_bird(tiles[i], 1, i, conf)
+            # save_detected_bird(tiles[i], 1, i, conf)
 
 print("done")

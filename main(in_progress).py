@@ -17,17 +17,7 @@ from beehive_utils.camera import get_available_cameras
 
 # --- Config ---
 INPUT_SIZE = (180, 180)
-ROWS, COLS = 8, 8
 CONFIDENCE_THRESHOLD = 0.9
-MODEL_PATH = "bird_detection_model_v3.1.tflite"
-SOUND_FILES = [
-    'alert1.wav',
-    'alert1.wav',
-    'alert1.wav',
-    'alert1.wav',
-    'alert1.wav'
-]
-CLASS_NAMES = ['no_bird', 'with_bird']
 LOOP_INTERVAL = 3
 BIRD_WARNING_THRESHOLD_SECONDS = 5   # Time before activating sound deterrent
 BIRD_DRONE_THRESHOLD_SECONDS = 10    # Time after sound before deploying drone
@@ -40,7 +30,7 @@ bird_detected_start_time = None
 sound_proc = None
 DRONE_DEPLOYED = False
 
-# --- Load TFLite Model ---
+# --- Load Beehive Model ---
 interpreter, input_details, output_details = load_beehive_model()
 
 # --- Functions ---

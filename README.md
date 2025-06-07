@@ -79,23 +79,24 @@ source beehiveenv/bin/activate
 ### 2. Run Tests and Main Scripts
 - **Test Camera:**
   ```bash
-  python test_camera.py
+  python test/check_camera.py
   ```
 - **Test Model:**
   ```bash
-  python test_model.py
+  python test/model_litert.py
+  python test/model_tflite.py
   ```
 - **Test Sound:**
   ```bash
-  python test_sound.py
+  python test/random_sound.py
   ```
 - **Test Drone:**
   ```bash
-  python test_drone.py
+  python test/drone.py
   ```
 - **Run Bird Detection System:**
   ```bash
-  python rpi_bird_detection.py
+  python main.py
   ```
 
 ---
