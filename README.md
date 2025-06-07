@@ -1,87 +1,156 @@
-1. Create and Activate Virtual Environment
+# Apis Mellifera Beehive Protection System
+
+A smart, modular system for automatic bird detection and deterrence using computer vision, sound, and drone deployment. Designed for Raspberry Pi and compatible with DJI Tello drones.
+
+---
+
+## 🚀 Project Overview
+This project uses a camera, sound deterrents, and a drone to protect beehives from birds. It leverages deep learning (TensorFlow Lite) for real-time bird detection and can auto-deploy a drone for further deterrence.
+
+## ✨ Features
+- Real-time bird detection using TFLite models
+- Modular tile-based image processing
+- Sound deterrent activation
+- Automated drone deployment (DJI Tello)
+- Logging and image saving for detected events
+- Easy testing for camera, model, sound, and drone
+- Auto-run configuration for headless startup
+
+## 🛠️ Requirements
+- Raspberry Pi (recommended) or Linux PC
+- Python 3.11+
+- Compatible camera
+- DJI Tello drone (optional)
+- Speakers for sound deterrent
+
+## 📦 Installation
+
+### 1. Create and Activate Virtual Environment
+```bash
 python3.11 -m venv beehiveenv
 source beehiveenv/bin/activate
+```
 
-2. Install System Dependencies
+### 2. Install System Dependencies
+```bash
 sudo apt update
 sudo apt install -y \
   ffmpeg libavdevice-dev libavfilter-dev libavformat-dev \
   libavcodec-dev libavutil-dev libswscale-dev libswresample-dev \
   libv4l-dev pkg-config build-essential python3.11-dev \
   libjpeg-dev libtiff5 libpng-dev
+```
 
-3. Upgrade pip and install required Python libraries
+### 3. Upgrade pip and Install Python Libraries
+```bash
 pip install --upgrade pip
-pip install numpy==1.24.4 cython
-pip install opencv-python
-pip install av
+pip install numpy==1.24.4 cython opencv-python av
+```
 
-4. Install TensorFlow Lite Runtime
+### 4. Install TensorFlow Lite Runtime
+```bash
 pip install tflite-runtime
+```
 
-5. Install DJI Drone Control Library
+### 5. Install DJI Drone Control Library
+```bash
 pip install djitellopy
+```
 
+### 6. Install Project Utilities
+```bash
+pip install -e .
+```
+
+### 7. (Optional) Install AI Edge Lite Runtime
+```bash
+pip install ai_edge_litert
+```
+
+---
+
+## 🧑‍💻 Usage
+
+### 1. Activate the Virtual Environment
+```bash
 source beehiveenv/bin/activate
+```
 
+### 2. Run Tests and Main Scripts
+- **Test Camera:**
+  ```bash
+  python test_camera.py
+  ```
+- **Test Model:**
+  ```bash
+  python test_model.py
+  ```
+- **Test Sound:**
+  ```bash
+  python test_sound.py
+  ```
+- **Test Drone:**
+  ```bash
+  python test_drone.py
+  ```
+- **Run Bird Detection System:**
+  ```bash
+  python rpi_bird_detection.py
+  ```
 
-#instructions
-before executing the python file, use the virtual environment, type:
-source beehiveenv/bin/activate
+---
 
-beehiveenv C:\Users\User>
+## ⚙️ Auto-Run Configuration (Headless / On Boot)
 
-then go to Desktop
-cd Desktop
-
-to test the opencv, type:
-python test_camera.py
-
-to test the model, type:
-python test_model.py
-
-to test the sound, type:
-python test_sound.py
-
-to test the drone, type:
-python test_drone.py
-
-to run bird detection system, type:
-python rpi_bird_detection.py
-
-
-#auto run configuration
-
-# Auto-connect to Tello WiFi
-
-open terminal and then execute this command:
+### 1. Auto-Connect to Tello WiFi
+Edit your wpa_supplicant config:
+```bash
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-
-then add this line:
+```
+Add:
+```conf
 network={
     ssid="TELLO-XXXXXX"
     key_mgmt=NONE
 }
+```
+Save and exit (Ctrl+X, Y, Enter).
 
-save and exit (Ctrl+X, Y, Enter)
+### 2. Auto-Start Bird Detection on Boot
+- Move `startup_bird_detection.sh` to `/home/beehive` (not Desktop).
+- Copy `connection_success.wav` to Desktop (or your desired location).
+- Make the script executable:
+  ```bash
+  chmod +x /home/beehive/startup_bird_detection.sh
+  ```
+- Add to crontab for auto-run at boot:
+  ```bash
+  crontab -e
+  ```
+  Add this line:
+  ```cron
+  @reboot /home/beehive/startup_bird_detection.sh
+  ```
 
-# find startup_bird_detection.sh and move it to /home/beehive folder (not Desktop)
-copy paste connection_success.wav to Desktop
+---
 
-# Make it executable
-chmod +x /home/beehive/startup_bird_detection.sh
+## 🧪 Testing & Troubleshooting
+- **To kill a running script:**
+  ```bash
+  pkill -f rpi_bird_detection_v1.py
+  ```
+- **If you encounter issues:**
+  - Double-check all dependencies are installed.
+  - Ensure your virtual environment is activated.
+  - Confirm the camera and drone are connected and working.
+  - Review log/output messages for hints.
 
-# Add to crontab
-crontab -e
+---
 
-then add:
-@reboot /home/beehive/startup_bird_detection.sh
+## 📄 License
+[MIT License](LICENSE)  
+Feel free to use, modify, and contribute!
 
-# How to kill running script?
-pkill -f rpi_bird_detection_v1.py
+---
 
-# install beehive_utils
-pip install -e .
-
-# install ai_edge_litert
-pip install ai_edge_litert
+For questions, suggestions, or contributions, please open an issue or pull request.
