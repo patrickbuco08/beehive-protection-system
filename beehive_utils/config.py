@@ -10,7 +10,7 @@ SOUND_FILES = [
     'tactical nuke alarm.wav'
 ]
 
-MODEL_NAME = "bird_detection_model_v3.2.tflite"
+MODEL_NAME = "bird_detection_model_v3.1.tflite"
 MODEL_INPUT_SIZE = (180, 180)
 MODEL_CLASS_NAMES = ['no_bird', 'with_bird']
 

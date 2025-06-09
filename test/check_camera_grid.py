@@ -1,9 +1,16 @@
 import cv2
+import time
 from beehive_utils.camera import get_available_cameras, draw_grid
+from beehive_utils.detection import is_bird_detected_in_tiles
+from beehive_utils.model import load_beehive_model
 
 
 def main():
-    # Get camera indexes
+
+    # --- Load Model ---
+    interpreter, input_details, output_details = load_beehive_model()
+
+    # Camera Setup
     camera_indexes = get_available_cameras()
     print("Available cameras:", camera_indexes)
 
@@ -18,8 +25,9 @@ def main():
 
     # Set resolution (optional)
     for cap in filter(None, [capture_one, capture_two]):
-        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+        # 640x480 or 800x600
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
     # Display camera feed with grid
     while True:
@@ -33,11 +41,23 @@ def main():
             frame_with_grid = draw_grid(frame.copy(), grid_size=(8, 8))
             cv2.imshow(f"Camera {cam_id} with Grid", frame_with_grid)
 
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            bird_detected = is_bird_detected_in_tiles(
+                frame_rgb,
+                interpreter,
+                input_details,
+                output_details
+            )
+
+            print(f"Bird detected: {bird_detected}")
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+        time.sleep(0.1)
 
-    capture_one.release()
-    capture_two.release()
+    for cap in filter(None, [capture_one, capture_two]):
+        cap.release()
     cv2.destroyAllWindows()
 
 
