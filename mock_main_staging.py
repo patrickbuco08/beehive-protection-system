@@ -68,18 +68,17 @@ def main():
                 print(f"❌ Failed to read from camera {cam_id}")
                 continue
 
-            # frame = cv2.rotate(frame, cv2.ROTATE_180)
+            frame = cv2.rotate(frame, cv2.ROTATE_180)
             frame_with_grid = draw_grid(frame.copy(), grid_size=(8, 8))
             cv2.imshow(f"Camera {cam_id} with Grid", frame_with_grid)
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-            bird_detected = True
-            # bird_detected = is_bird_detected_in_tiles(
-            #     frame_rgb,
-            #     interpreter,
-            #     input_details,
-            #     output_details
-            # )
+            bird_detected = is_bird_detected_in_tiles(
+                frame_rgb,
+                interpreter,
+                input_details,
+                output_details
+            )
             if bird_detected:
                 bird_found = True
                 break
