@@ -44,22 +44,48 @@ def is_bird_detected_in_tiles(frame, interpreter, input_details, output_details,
     Returns True as soon as a tile with 'with_bird' and confidence >= CONFIDENCE_THRESHOLD is found, otherwise False.
     """
     for tile_shape in TILE_SHAPES:
-        print(f"\n--- Processing with tile shape: {tile_shape} ---")
         tiles, coords = preprocess_frame_to_tiles(frame, tile_shape)
         for i, tile in enumerate(tiles):
             label, conf = predict_tile(
                 tile, interpreter, input_details, output_details)
             r, c, x, y = coords[i]
 
-            # save_detected_bird(tiles[i], 1, i, conf, label) # enable this when you want to generate dataset
-
             if label == "with_bird" and conf >= CONFIDENCE_THRESHOLD:
                 print(
                     f"bird detected at tile_shape {tile_shape} (tile {i}) confidence {conf:.2f} [{r},{c}] [{x},{y}]")
 
-                # comment this when you want to generate dataset
                 if with_logger:
                     save_detected_bird(tiles[i], 1, i, conf, label)
+
                 return True
 
     return False
+
+
+def check_image_tiles_confidence(frame, interpreter, input_details, output_details):
+    """
+    Processes an input image by dividing it into tiles of various shapes (as defined in TILE_SHAPES),
+    runs bird detection on each tile, and saves each tile's detection result as an image file.
+
+    This function is intended for dataset generation or confidence analysis across all tiles, not for
+    early exit upon first detection. All tiles are processed and saved regardless of detection result.
+
+    Args:
+        frame (np.ndarray): The input image/frame to process (BGR format).
+        interpreter: The TFLite/Edge interpreter for running inference.
+        input_details: Interpreter input details.
+        output_details: Interpreter output details.
+
+    Returns:
+        True (always): Indicates completion of processing (for compatibility).
+    """
+    for tile_shape in TILE_SHAPES:
+        print(f"\n--- Processing with tile shape: {tile_shape} ---")
+        tiles, coords = preprocess_frame_to_tiles(frame, tile_shape)
+        for i, tile in enumerate(tiles):
+            label, conf = predict_tile(
+                tile, interpreter, input_details, output_details)
+
+            save_detected_bird(tiles[i], 1, i, conf, label)
+
+    return True

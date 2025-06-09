@@ -2,7 +2,7 @@ import cv2
 import os
 import glob
 
-from beehive_utils.detection import is_bird_detected_in_tiles
+from beehive_utils.detection import check_image_tiles_confidence
 from beehive_utils.model import load_beehive_model
 
 # --- Load TFLite Model ---
@@ -30,15 +30,11 @@ for img_path in image_files:
     frame_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     # Run detection over multiple tile shapes
-    bird_detected = is_bird_detected_in_tiles(
+    check_image_tiles_confidence(
         frame_rgb,
         interpreter,
         input_details,
         output_details
     )
-    if bird_detected:
-        print(f"Bird detected in {img_path}")
-    else:
-        print(f"No bird detected in {img_path}")
 
 print("done")
