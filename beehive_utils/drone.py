@@ -3,6 +3,19 @@ from beehive_utils.config import DRONE_FORWARD_DISTANCE
 
 import time
 
+def force_land_drone():
+    """
+    Attempts to force land the Tello drone, handling connection and landing exceptions gracefully.
+    Useful for emergency or programmatic landing scenarios.
+    """
+    try:
+        tello = Tello()
+        tello.connect()
+        tello.land()
+        print('Drone landed (force_land_drone).')
+    except Exception as e:
+        print(f'Error landing drone: {str(e)}')
+
 
 def deploy_drone():
     print("🚁 Drone: Starting mission...")
