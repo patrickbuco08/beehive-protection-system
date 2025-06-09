@@ -51,14 +51,14 @@ def is_bird_detected_in_tiles(frame, interpreter, input_details, output_details)
                 tile, interpreter, input_details, output_details)
             r, c, x, y = coords[i]
 
-            # save_detected_bird(tiles[i], 1, i, conf) # enable this when you want to generate dataset
+            # save_detected_bird(tiles[i], 1, i, conf, label) # enable this when you want to generate dataset
 
             if label == "with_bird" and conf >= CONFIDENCE_THRESHOLD:
                 print(
                     f"bird detected at tile_shape {tile_shape} (tile {i}) confidence {conf:.2f} [{r},{c}] [{x},{y}]")
 
                 # comment this when you want to generate dataset
-                save_detected_bird(tiles[i], 1, i, conf)
+                save_detected_bird(tiles[i], 1, i, conf, label)
                 return True
 
     return False

@@ -2,4 +2,6 @@ beehiveenv
 beehive_utils/assets/sounds
 detections
 models/.ipynb_checkpoints
+models/dataset
+models/*.keras
 test_images
