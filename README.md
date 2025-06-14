@@ -45,9 +45,9 @@ python3.11 -m venv beehiveenv
 
 ### 🐍 Using Conda Environments
 
-#### Create a new conda environment (e.g., named birdenv) with Python 3.9:
+#### Create a new conda environment (e.g., named birdenv) with Python 3.11:
 ```bash
-conda create -n beehiveenv python=3.9
+conda create -n beehiveenv python=3.11
 ```
 
 #### List all available conda environments:

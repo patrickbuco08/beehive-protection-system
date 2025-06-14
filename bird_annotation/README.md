@@ -6,25 +6,19 @@ A quick guide to setting up your environment and training a YOLOv8 model for bir
 
 ## 🛠️ Setup
 
-### 1. Create the Conda Environment
-Create a new conda environment with Python 3.10:
-```bash
-conda create -n bird-detector python=3.10 -y
-```
-
-### 2. Activate the Environment
-Activate the environment you just created:
-```bash
-conda activate bird-detector
-```
-
-### 3. Install Dependencies
+### Install Dependencies
 Install the required Python packages:
 ```bash
 pip install opencv-python numpy matplotlib
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 pip install ultralytics
 ```
+
+---
+
+## 🏷️ Annotating Images
+
+If you want to annotate your images, you can use [LabelImg](https://github.com/HumanSignal/labelImg/releases) — a free and popular graphical image annotation tool. Download the latest release for your operating system from the official GitHub page above.
 
 ---
 
