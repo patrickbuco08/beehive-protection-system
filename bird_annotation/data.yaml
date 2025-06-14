@@ -1,0 +1,5 @@
+train: bird-dataset/images/train
+val: bird-dataset/images/val
+
+nc: 1
+names: ['bird']
