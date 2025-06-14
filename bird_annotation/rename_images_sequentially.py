@@ -1,4 +1,5 @@
 # usage: python rename_images_sequentially.py --start 0 --folder to-label
+# Supports renaming both .jpg and .png images.
 
 import os
 import argparse
@@ -23,17 +24,18 @@ def main():
         print(f"Error: Folder '{folder}' does not exist.")
         return
     
-    # Get all jpg images and sort them
-    images = [f for f in os.listdir(folder) if f.lower().endswith('.jpg')]
+    # Get all jpg and png images and sort them
+    images = [f for f in os.listdir(folder) if f.lower().endswith('.jpg') or f.lower().endswith('.png')]
     images.sort()  # Sort to ensure consistent ordering
     
-    # Rename images
+    # Rename images, preserving extension
     for i, filename in enumerate(images):
         src = os.path.join(folder, filename)
-        dst = os.path.join(folder, f"{i + start_index}.jpg")
+        ext = os.path.splitext(filename)[1].lower()
+        dst = os.path.join(folder, f"{i + start_index}{ext}")
         os.rename(src, dst)
     
-    print(f"Renamed {len(images)} images to {start_index}.jpg, {start_index+1}.jpg, ... in '{folder}'")
+    print(f"Renamed {len(images)} images to {start_index}{ext}, {start_index+1}{ext}, ... in '{folder}'")
 
 if __name__ == "__main__":
     main()
