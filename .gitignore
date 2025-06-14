@@ -12,3 +12,4 @@ bird_annotation/bird-dataset/images/val/*.jpg
 bird_annotation/bird-dataset/images/val/*.png
 bird_annotation/bird-dataset/labels/train/*.txt
 bird_annotation/bird-dataset/labels/val/*.txt
+bird_annotation/*.zip
