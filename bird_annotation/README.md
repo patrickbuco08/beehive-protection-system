@@ -26,12 +26,7 @@ If you want to annotate your images, you can use [LabelImg](https://github.com/H
 
 Train your YOLOv8 model on your bird dataset using the following command:
 ```bash
-yolo detect train \
-  data=data.yaml \
-  model=yolov8n.pt \
-  epochs=10 \
-  imgsz=640 \
-  name=bird-detector
+yolo detect train model=yolov8n.pt data=data.yaml epochs=30 imgsz=640 name=bird-detector augment=True
 ```
 - `data`: Path to your dataset configuration file.
 - `model`: Pretrained YOLOv8 model to start from.
