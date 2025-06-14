@@ -50,6 +50,9 @@ def is_bird_detected_in_tiles(frame, interpreter, input_details, output_details,
                 tile, interpreter, input_details, output_details)
             r, c, x, y = coords[i]
 
+            if label == "with_bird":
+                print("confidence: ", conf)
+
             if label == "with_bird" and conf >= CONFIDENCE_THRESHOLD:
                 print(
                     f"bird detected at tile_shape {tile_shape} (tile {i}) confidence {conf:.2f} [{r},{c}] [{x},{y}]")

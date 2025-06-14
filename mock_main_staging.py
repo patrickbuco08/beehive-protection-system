@@ -122,6 +122,7 @@ def main():
                     reset_system_state()
                     print('System reset after drone mission.')
         else:
+            print('No bird detected.')
             stop_sound_deterrent('Sound deterrent stopped (no bird).')
             if drone_deployed:
                 force_land_drone()
