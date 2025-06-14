@@ -5,3 +5,4 @@ models/.ipynb_checkpoints
 models/dataset
 models/*.keras
 test_images
+git_instructions.txt

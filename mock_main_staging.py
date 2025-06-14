@@ -57,6 +57,11 @@ def main():
     drone_deployed = False
     drone_started = False
 
+    # Set resolution (optional)
+    for cap in [capture_one]:
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
     while True:
         bird_found = False
 
