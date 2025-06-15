@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  beehive-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+      # Add build configuration for better performance and troubleshooting
+      shm_size: '2gb'
+    container_name: beehive-protection
+    volumes:
+      # Mount the code directory for development
+      - .:/app
+    # Default command runs the application
+    command: app
+    restart: unless-stopped
+    # Network configuration (simplified for training only)
+    networks:
+      - beehive-network
+    
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+      # Add build configuration for better performance and troubleshooting
+      shm_size: '2gb'
+    container_name: beehive-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+    command: jupyter
+    restart: unless-stopped
+    networks:
+      - beehive-network
+
+networks:
+  beehive-network:
+    driver: bridge
