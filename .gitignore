@@ -1,5 +1,5 @@
 beehiveenv
-beehive_utils/assets/sounds
+# beehive_utils/assets/sounds
 detections
 models/.ipynb_checkpoints
 models/dataset
