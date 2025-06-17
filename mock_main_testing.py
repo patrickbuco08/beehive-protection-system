@@ -38,7 +38,9 @@ def main():
             interpreter,
             input_details,
             output_details,
-            with_logger=True
+            cam_id=1,
+            with_image_logger=True,
+            with_text_logger=False
         )
 
         if bird_detected:

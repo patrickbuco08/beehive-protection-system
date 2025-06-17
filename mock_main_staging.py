@@ -75,8 +75,7 @@ def main():
 
             frame = cv2.rotate(frame, cv2.ROTATE_180)
             frame_with_grid = draw_grid(frame.copy(), grid_size=(8, 8))
-            # Commented out to avoid Qt plugin issues on Raspberry Pi
-            # cv2.imshow(f"Camera {cam_id} with Grid", frame_with_grid)
+            cv2.imshow(f"Camera {cam_id} with Grid", frame_with_grid)
             print(f"Processing camera {cam_id} feed (display disabled)")
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -84,7 +83,10 @@ def main():
                 frame_rgb,
                 interpreter,
                 input_details,
-                output_details
+                output_details,
+                cam_id,
+                with_image_logger=True,
+                with_text_logger=False
             )
             if bird_detected:
                 bird_found = True
@@ -131,9 +133,7 @@ def main():
                 drone_deployed = False
             reset_system_state()
 
-        # Break on 'q' or window close - commented out due to no display
-        # if cv2.waitKey(1) & 0xFF == ord("q"):
-        if time.time() % 10 < 0.1:  # Print status roughly every 10 seconds
+        if cv2.waitKey(1) & 0xFF == ord("q"):
             if sound_proc is not None and sound_proc.poll() is None:
                 sound_proc.terminate()
                 print('Sound deterrent stopped (no bird).')

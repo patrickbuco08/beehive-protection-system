@@ -75,7 +75,10 @@ def main():
                 frame_rgb,
                 interpreter,
                 input_details,
-                output_details
+                output_details,
+                cam_id,
+                with_image_logger=False,
+                with_text_logger=True
             )
             if bird_detected:
                 bird_found = True
@@ -101,8 +104,7 @@ def main():
                 print("🎵 I'm making noise, but the bird is still hanging around...")
                 if current_time - sound_start_time >= BIRD_DRONE_THRESHOLD_SECONDS and not drone_deployed:
                     print("🚁 Deploying the drone now, wish me luck!")
-                    # deploy_drone()
-                    time.sleep(5)
+                    deploy_drone()
                     print("Drone finished.")
                     drone_deployed = True
                     drone_started = True

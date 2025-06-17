@@ -38,7 +38,7 @@ def predict_tile(tile, interpreter, input_details, output_details):
     return MODEL_CLASS_NAMES[pred_class], confidence
 
 
-def is_bird_detected_in_tiles(frame, interpreter, input_details, output_details, with_logger=False):
+def is_bird_detected_in_tiles(frame, interpreter, input_details, output_details, camera_id, with_image_logger=False, with_text_logger=False):
     """
     Checks if a bird is detected in any tile of the frame using multiple tile shapes.
     Returns True as soon as a tile with 'with_bird' and confidence >= CONFIDENCE_THRESHOLD is found, otherwise False.
@@ -57,8 +57,11 @@ def is_bird_detected_in_tiles(frame, interpreter, input_details, output_details,
                 print(
                     f"bird detected at tile_shape {tile_shape} (tile {i}) confidence {conf:.2f} [{r},{c}] [{x},{y}]")
 
-                if with_logger:
-                    save_detected_bird(tiles[i], 1, i, conf, label)
+                if with_image_logger:
+                    save_detected_bird(tiles[i], camera_id, i, conf, label)
+
+                if with_text_logger:
+                    save_bird_logs(camera_id, i, conf)
 
                 return True
 
