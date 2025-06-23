@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 from beehive_utils.config import MODEL_INPUT_SIZE, MODEL_CLASS_NAMES, TILE_SHAPES, CONFIDENCE_THRESHOLD
-from beehive_utils.logger import save_detected_bird
+from beehive_utils.logger import save_detected_bird, save_bird_logs
 
 # Usage:
 # tiles, coords = preprocess_frame_to_tiles(frame)  # Defaults to (4, 4)
